@@ -15,7 +15,7 @@ A Map is stored as a 2D Array of Cells, where Cells have the following data:<br 
 
 ##Creation Algorithms
 ###Maze Generation
-![alt tag](https://upload.wikimedia.org/wikipedia/en/transcoded/7/7d/Depth-First_Search_Animation.ogv/Depth-First_Search_Animation.ogv.360p.webm)<br />
+![alt tag](http://www.xnafan.net/wp-content/uploads/2012/03/maze_19x19_anim.gif)<br />
 The maze will is generated using Recursive Backtracking (Depth first search)
 1. Start at point 1,1
 2. Randomly choose a wall at that point and carve a passage through to the adjacent cell, but only if the adjacent cell has not been visited yet. This becomes the new current cell.
