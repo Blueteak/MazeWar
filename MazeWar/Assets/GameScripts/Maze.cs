@@ -81,7 +81,7 @@ public class Maze{
 						{
 							UsedCells.Add(n1);
 							UsedCells.Add(n2);
-							Debug.Log("Want to Remove ("+x+","+y+")\nNeighbors: ("+nB[0].x+","+nB[0].y+") - ("+nB[1].x+","+nB[1].y+")");
+							//Debug.Log("Want to Remove ("+x+","+y+")\nNeighbors: ("+nB[0].x+","+nB[0].y+") - ("+nB[1].x+","+nB[1].y+")");
 							MazeCells[x,y].isWall = false;
 						}
 
@@ -144,6 +144,11 @@ public class Maze{
 	public Cell[,] GetCells()
 	{
 		return MazeCells;
+	}
+
+	public Vector2 Dimensions()
+	{
+		return new Vector2(MazeCells.GetLength(0), MazeCells.GetLength(1));
 	}
 
 	public Cell GetCell(int x, int y)

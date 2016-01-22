@@ -22,6 +22,11 @@ public class MazeGenerator : MonoBehaviour {
 		MakeMaze(cells);
 	}
 
+	public Maze currentMaze()
+	{
+		return cMaze;
+	}
+
 	void MakeMaze(Cell[,] cells)
 	{
 		ClearOld();
