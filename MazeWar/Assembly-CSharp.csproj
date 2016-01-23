@@ -49,6 +49,7 @@
      <Compile Include="Assets\GameScripts\Maze.cs" />
      <Compile Include="Assets\GameScripts\MazeGenerator.cs" />
      <Compile Include="Assets\GameScripts\MiniMap.cs" />
+     <Compile Include="Assets\GameScripts\PlayerCamera.cs" />
      <Compile Include="Assets\GameScripts\PlayerControl.cs" />
      <Compile Include="Assets\PlayerIcon.cs" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
