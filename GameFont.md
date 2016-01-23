@@ -7,7 +7,7 @@ Finding the correct font is an important part in creating a convincing replica o
 The alto is now basically a relic, so access to one is impracticle and ultimately unhelpful unless a new font is to be created. Interestingly, the source code for the Alto is freely available here: http://xeroxalto.computerhistory.org/index.html <br />
 Unfortunately, the font files are in binary and to be used in the application .ttf files are required. <br />
 Luckily, a few other people enjoy the aesthetics of the old Xerox machines and have created some fonts based on the Xerox Alto font. Here is a reference image of the Xerox terminal in action.
-![alt tag](http://toastytech.com/guis/altoboot3.gif) <br />
+![alt tag](http://i.imgur.com/k4HeGUB.png) <br />
 Damien Guard, a software engineer from France created a fantastic replica of the font, which can seen here:
 ![alt tag](https://images-origin.damieng.com/fonts/converted/AltoMono.png) <br />
 Download Link: https://download.damieng.com/fonts/reproduced/AltoMono.zip<br /><br />
