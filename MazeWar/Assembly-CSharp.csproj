@@ -52,6 +52,10 @@
      <Compile Include="Assets\GameScripts\PlayerCamera.cs" />
      <Compile Include="Assets\GameScripts\PlayerControl.cs" />
      <Compile Include="Assets\PlayerIcon.cs" />
+     <Compile Include="Assets\UIScripts\CaretStick.cs" />
+     <Compile Include="Assets\UIScripts\InputSetup.cs" />
+     <Compile Include="Assets\UIScripts\IntroScreen.cs" />
+     <Compile Include="Assets\UIScripts\IntroScreen2.cs" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
