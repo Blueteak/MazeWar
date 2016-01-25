@@ -1,5 +1,5 @@
 # Maze War
-This is a recreation of the first First Person Shooter game, **Maze War**. It was created in 1973 for the _Imlacs_ at NASA, but the first real game version was in 1985 for the _Xerox Alto_ machine. <br />
+This is a recreation of the first First Person Shooter game, **Maze War**. It was created in 1973 for the _Imlacs_ at NASA, but the first real game version was in 1977 for the _Xerox Alto_ machine. <br />
 This game, while intended as a clone of the original, will add some features that have been appended to later versions. However it will try to recreate the same visual atmosphere as the initial version of the game in an attempt to elicit nostalgia from those who have played the original.
 
 ##Original Game

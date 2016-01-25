@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class PlayerControl : MonoBehaviour {
 
 	MazeGenerator gen;
@@ -8,6 +8,11 @@ public class PlayerControl : MonoBehaviour {
 
 	int pX;
 	int pY;
+
+	public Text scoreT;
+	public Text nameT;
+
+	public LineRenderer r;
 
 	void Start () 
 	{
@@ -28,6 +33,33 @@ public class PlayerControl : MonoBehaviour {
 			RandomPlacement();
 		}
 		DoMovement();
+		if(Input.GetKeyDown(KeyCode.Space))
+		{
+			StopCoroutine("LineShow");
+			StartCoroutine("LineShow");
+			Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*10);
+			Debug.DrawRay(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*10,Color.blue,1);
+			RaycastHit hit;
+			if(Physics.Raycast(r, out hit, 15))
+			{
+				if(hit.collider.tag == "OtherPlayer")
+				{
+					Destroy(hit.collider.gameObject);
+					scoreT.text = "10\n0";
+					nameT.text = "Blueteak\nbomber";
+				}
+			}
+		}
+	}
+
+	IEnumerator LineShow()
+	{
+		Debug.Log("Showing Line");
+		r.enabled = true;
+		yield return new WaitForSeconds(0.1f);
+		r.enabled = false;
+		Debug.Log("Hiding Line");
+		StopCoroutine("LineShow");
 	}
 
 	public void RandomPlacement()

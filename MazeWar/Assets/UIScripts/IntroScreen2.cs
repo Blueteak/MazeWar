@@ -18,7 +18,7 @@ public class IntroScreen2 : MonoBehaviour {
 		if(Input.GetButtonDown("Submit"))
 		{
 			Debug.Log("Name Selected: " + name);
-			NameLabel.text = name;
+			NameLabel.text = "bomber\n"+name;
 			introPanel.SetActive(false);
         }
 	}
