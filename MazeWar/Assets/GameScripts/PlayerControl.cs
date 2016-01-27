@@ -1,18 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
-public class PlayerControl : MonoBehaviour {
+using UnityEngine.Networking;
+
+public class PlayerControl : NetworkBehaviour {
 
 	MazeGenerator gen;
 	Maze m;
 
+	[SyncVar]
 	int pX;
+	[SyncVar]
 	int pY;
 
-	public Text scoreT;
-	public Text nameT;
-
 	public LineRenderer r;
+
+	public GameObject SpriteObj;
+	public GameObject CamHolder;
+
+	bool setup;
 
 	void Start () 
 	{
@@ -32,22 +37,51 @@ public class PlayerControl : MonoBehaviour {
 			m = gen.currentMaze();
 			RandomPlacement();
 		}
-		DoMovement();
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(isLocalPlayer)
 		{
-			StopCoroutine("LineShow");
-			StartCoroutine("LineShow");
-			Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*10);
-			Debug.DrawRay(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*10,Color.blue,1);
-			RaycastHit hit;
-			if(Physics.Raycast(r, out hit, 15))
+			if(!setup)
 			{
-				if(hit.collider.tag == "OtherPlayer")
-				{
-					Destroy(hit.collider.gameObject);
-					scoreT.text = "10\n0";
-					nameT.text = "Blueteak\nbomber";
-				}
+				gameObject.tag = "MyPlayer";
+				SpriteObj.SetActive(false);
+				CamHolder.SetActive(true);
+			}
+			bool up = Input.GetKeyDown(KeyCode.UpArrow);
+			bool down = Input.GetKeyDown(KeyCode.DownArrow);
+			bool left = Input.GetKeyDown(KeyCode.LeftArrow);
+			bool right = Input.GetKeyDown(KeyCode.RightArrow);
+			if(up || down || left || right)
+			{
+				Debug.Log("Move Command");
+				CmdDoMovement(up, down, left, right);
+			}
+		}
+		else
+		{
+			if(!setup)
+			{
+				SpriteObj.SetActive(true);
+			}
+		}
+			
+		if(isLocalPlayer && Input.GetKeyDown(KeyCode.Space))
+		{
+			CmdShoot();
+		}
+	}
+
+	[Command]
+	void CmdShoot()
+	{
+		StopCoroutine("LineShow");
+		StartCoroutine("LineShow");
+		Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*10);
+		Debug.DrawRay(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*10,Color.blue,1);
+		RaycastHit hit;
+		if(Physics.Raycast(r, out hit, 15))
+		{
+			if(hit.collider.tag == "OtherPlayer")
+			{
+				Destroy(hit.collider.gameObject);
 			}
 		}
 	}
@@ -64,6 +98,15 @@ public class PlayerControl : MonoBehaviour {
 
 	public void RandomPlacement()
 	{
+		StopCoroutine("Place");
+		StartCoroutine("Place");
+	}
+
+	IEnumerator Place()
+	{
+		while(m == null)
+			yield return true;
+		
 		int x = 0;
 		int y =0;
 		while(m.GetCell(x,y).isWall)
@@ -77,7 +120,8 @@ public class PlayerControl : MonoBehaviour {
 		transform.localEulerAngles = new Vector3(0,Random.Range(0,4)*90, 0);
 	}
 
-	void DoMovement()
+	[Command]
+	void CmdDoMovement(bool up, bool back, bool left, bool right)
 	{
 		Vector2 fDir = new Vector2(0,1);
 		float ang = transform.localEulerAngles.y;
@@ -88,7 +132,7 @@ public class PlayerControl : MonoBehaviour {
 		else if(ang < 280 && ang > 260)
 			fDir = new Vector2(-1,0);
 
-		if(Input.GetKeyDown(KeyCode.UpArrow))
+		if(up)
 		{
 			int nX = pX + (int)fDir.x;
 			int nY = pY + (int)fDir.y;
@@ -99,7 +143,7 @@ public class PlayerControl : MonoBehaviour {
 				transform.position = new Vector3(nX*1.5f, 0, nY*1.5f);
 			}	
 		}
-		else if(Input.GetKeyDown(KeyCode.DownArrow))
+		else if(back)
 		{
 			int nX = pX - (int)fDir.x;
 			int nY = pY - (int)fDir.y;
@@ -110,13 +154,18 @@ public class PlayerControl : MonoBehaviour {
 				transform.position = new Vector3(nX*1.5f, 0, nY*1.5f);
 			}
 		}
-		else if(Input.GetKeyDown(KeyCode.LeftArrow))
+		else if(left)
 		{
 			transform.localEulerAngles += new Vector3(0,-90,0);
 		}
-		else if(Input.GetKeyDown(KeyCode.RightArrow))
+		else if(right)
 		{
 			transform.localEulerAngles += new Vector3(0, 90, 0);
 		}
+	}
+
+	void OnDestroy()
+	{
+		transform.GetComponentInChildren<Camera>().transform.SetParent(null);
 	}
 }

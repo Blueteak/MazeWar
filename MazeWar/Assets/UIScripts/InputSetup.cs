@@ -3,10 +3,17 @@ using System.Collections;
 using UnityEngine.EventSystems;
 public class InputSetup : MonoBehaviour 
 {	
-	// Update is called once per frame
+	int frm;
+
 	void Update () 
 	{
-		if(EventSystem.current.currentSelectedGameObject != gameObject)
+		if(EventSystem.current.currentSelectedGameObject != gameObject && frm > 2)
+		{
 			EventSystem.current.SetSelectedGameObject(gameObject);
+			frm = 0;
+		}
+		else
+			frm++;
+			
 	}
 }

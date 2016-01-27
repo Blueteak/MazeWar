@@ -20,5 +20,21 @@ public class PlayerCamera : MonoBehaviour {
 		offset = new Vector2(offset.x*c.rect.width, offset.y*c.rect.height);
 	}
 
+	void Update()
+	{
+		if(transform.parent == null)
+		{
+			GameObject t = GameObject.FindGameObjectWithTag("CameraHolder");
+			if(t != null)
+			{
+				transform.SetParent(t.transform);
+				transform.localPosition = Vector3.zero;
+				transform.localEulerAngles = Vector3.zero;
+			}
+				
+
+		}
+	}
+
 
 }

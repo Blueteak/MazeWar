@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-public class MazeGenerator : MonoBehaviour {
+using UnityEngine.Networking;
+
+public class MazeGenerator : NetworkBehaviour {
 
 	Maze cMaze;
 	public int Width;
@@ -14,10 +16,14 @@ public class MazeGenerator : MonoBehaviour {
 
 	List<GameObject> WallObjects;
 
-	void Start () 
+	[SyncVar]
+	public int MazeSeed;
+
+	public void NewMaze()
 	{
+		ClearOld();
 		WallObjects = new List<GameObject>();
-		cMaze = new Maze(Width, Height, 100-SparsePercent);
+		cMaze = new Maze(Width, Height, 100-SparsePercent, MazeSeed);
 		Cell[,] cells = cMaze.GetCells();
 		MakeMaze(cells);
 	}
@@ -47,8 +53,11 @@ public class MazeGenerator : MonoBehaviour {
 
 	void ClearOld()
 	{
-		foreach(var v in WallObjects)
+		if(WallObjects != null)
+		{
+			foreach(var v in WallObjects)
 			Destroy(v);
+		}
 		WallObjects = new List<GameObject>();
 	}
 

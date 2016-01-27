@@ -1,17 +1,11 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/UIScripts/IntroScreen2.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Prefabs/LookAtCamera.cs">
     <Files>
-      <File FileName="Assets/GameScripts/PlayerControl.cs" Line="19" Column="30" />
-      <File FileName="Assets/GameScripts/Maze.cs" Line="84" Column="10" />
-      <File FileName="Assets/GameScripts/MazeGenerator.cs" Line="25" Column="27" />
-      <File FileName="Assets/GameScripts/ExtensionMethods.cs" Line="8" Column="5" />
-      <File FileName="Assets/GameScripts/MiniMap.cs" Line="37" Column="37" />
-      <File FileName="Assets/PlayerIcon.cs" Line="31" Column="4" />
-      <File FileName="Assets/GameScripts/PlayerCamera.cs" Line="25" Column="1" />
-      <File FileName="Assets/UIScripts/IntroScreen.cs" Line="26" Column="39" />
-      <File FileName="Assets/UIScripts/IntroScreen2.cs" Line="21" Column="26" />
-      <File FileName="Assets/UIScripts/CaretStick.cs" Line="20" Column="7" />
+      <File FileName="Assets/UIScripts/IntroScreen2.cs" Line="18" Column="4" />
+      <File FileName="Assets/GameScripts/NetworkLogic.cs" Line="7" Column="27" />
+      <File FileName="Assets/GameScripts/PlayerControl.cs" Line="30" Column="16" />
+      <File FileName="Assets/Prefabs/LookAtCamera.cs" Line="14" Column="43" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

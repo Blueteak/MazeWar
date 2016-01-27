@@ -5,7 +5,9 @@ using UnityEngine.UI;
 public class IntroScreen2 : MonoBehaviour {
 
 	public GameObject introPanel;
-	public Text NameLabel;
+
+	public GameObject SelectPanelServer;
+	public GameObject SelectPanelClient;
 
 	void Update()
 	{
@@ -13,13 +15,24 @@ public class IntroScreen2 : MonoBehaviour {
 			Application.Quit();
 	}
 
-	public void SubmitName(string name)
+	public void SubmitChoice(string Choice)
 	{
 		if(Input.GetButtonDown("Submit"))
 		{
-			Debug.Log("Name Selected: " + name);
-			NameLabel.text = "bomber\n"+name;
-			introPanel.SetActive(false);
+			if(Choice.ToUpper().Equals("C"))
+			{
+				Debug.Log("Creating New Server");
+				SelectPanelServer.SetActive(true);
+				gameObject.SetActive(false);
+			}
+			else if(Choice.ToUpper().Equals("J"))
+			{
+				Debug.Log("Creating New Client");
+				SelectPanelClient.SetActive(true);
+				gameObject.SetActive(false);
+			}
+
         }
 	}
+
 }

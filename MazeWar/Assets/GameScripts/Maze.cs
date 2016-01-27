@@ -7,7 +7,7 @@ public class Maze{
 	Cell[,] MazeCells;
 
 	// Use this for initialization
-	public Maze (int W, int H, int percent)
+	public Maze (int W, int H, int percent, int seed)
 	{
 		W = Mathf.Max(W, 3);
 		H = Mathf.Max(H, 3);
@@ -16,24 +16,25 @@ public class Maze{
 		if(H%2 == 0)
 			H++;
 		MazeCells = new Cell[W,H];
-		Generate(percent);
+		Generate(percent, seed);
 	}
 
-	public void Generate(int HolePercentage)
+	public void Generate(int HolePercentage, int seed)
 	{
 		ResetMaze();
 		//Code to fill in Cells
 		List<Cell> Visited = new List<Cell>();
-		CarvePassage(1,1,Visited);
-		RandomHoles(HolePercentage);
+		System.Random r = new System.Random(seed);
+		CarvePassage(1,1,Visited, r);
+		RandomHoles(HolePercentage, r);
 	}
 
-	void CarvePassage(int x, int y, List<Cell> visited)
+	void CarvePassage(int x, int y, List<Cell> visited, System.Random r)
 	{
 		visited.Add(MazeCells[x,y]);
 		List<Vector2> Dir = new List<Vector2>(); 
 		Dir.Add(new Vector2(0,1)); Dir.Add(new Vector2(0,-1)); Dir.Add(new Vector2(1,0)); Dir.Add(new Vector2(-1,0));
-		Dir.Shuffle();
+		Dir.Shuffle(r);
 		foreach(var i in Dir)
 		{
 			int nx = (int)(x+(2*i.x));
@@ -43,13 +44,13 @@ public class Maze{
 				if(!visited.Contains(MazeCells[nx,ny]))
 				{
 					MazeCells[(int)(x+i.x), (int)(y+i.y)].isWall = false;
-					CarvePassage(nx, ny, visited);
+					CarvePassage(nx, ny, visited, r);
 				}
 			}
 		}
 	}
 
-	void RandomHoles(int percent)
+	void RandomHoles(int percent, System.Random r)
 	{
 		List<Cell> UsedCells = new List<Cell>();
 		for(int x = 1; x < MazeCells.GetLength(0)-1; x++)
@@ -76,8 +77,8 @@ public class Maze{
 					}
 					if(adj == 2 && ((n1.x == n2.x) || (n1.y == n2.y)))
 					{
-						int r = Random.Range(0, 100);
-						if(r > percent)
+						int rN = r.Next(0,100);
+						if(rN > percent)
 						{
 							UsedCells.Add(n1);
 							UsedCells.Add(n2);

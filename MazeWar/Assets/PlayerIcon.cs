@@ -27,7 +27,13 @@ public class PlayerIcon : MonoBehaviour {
 		{
 			m = mGen.currentMaze();
 		}
-		else if(m != null)
+		else if(pControl == null)
+		{
+			GameObject g = GameObject.FindGameObjectWithTag("MyPlayer");
+			if(g != null)
+				pControl = g.GetComponent<PlayerControl>();
+		}
+		else
 		{
 			pOffset = pixelOffset();
 			cellDim = cellDimenstions();
