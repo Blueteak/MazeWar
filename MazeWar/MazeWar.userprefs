@@ -1,11 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Prefabs/LookAtCamera.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GameScripts/NetworkLogic.cs">
     <Files>
-      <File FileName="Assets/UIScripts/IntroScreen2.cs" Line="18" Column="4" />
-      <File FileName="Assets/GameScripts/NetworkLogic.cs" Line="7" Column="27" />
-      <File FileName="Assets/GameScripts/PlayerControl.cs" Line="30" Column="16" />
-      <File FileName="Assets/Prefabs/LookAtCamera.cs" Line="14" Column="43" />
+      <File FileName="Assets/GameScripts/PlayerControl.cs" Line="24" Column="43" />
+      <File FileName="Assets/UIScripts/IntroScreen2.cs" Line="32" Column="15" />
+      <File FileName="Assets/GameScripts/NetworkLogic.cs" Line="14" Column="84" />
+      <File FileName="Assets/UIScripts/ServerSetup.cs" Line="10" Column="32" />
+      <File FileName="Assets/UIScripts/ClientSetup1.cs" Line="15" Column="2" />
+      <File FileName="Assets/UIScripts/ClientSetup2.cs" Line="33" Column="4" />
+      <File FileName="Assets/UIScripts/InputSetup.cs" Line="16" Column="10" />
+      <File FileName="Assets/GameScripts/MazeGenerator.cs" Line="59" Column="15" />
+      <File FileName="Assets/GameScripts/Maze.cs" Line="26" Column="41" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
