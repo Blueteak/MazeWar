@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.Networking;
 using UnityEngine.UI;
+using System.Net;
+using System.Net.Sockets;
 
 public class ServerSetup : MonoBehaviour {
 
@@ -12,7 +13,7 @@ public class ServerSetup : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		GetComponent<Text>().text += Network.player.ipAddress+"\n"+PostString+"\n";
+		GetComponent<Text>().text += LocalIPAddress()+"\n"+PostString+"\n";
 	}
 	
 	// Update is called once per frame
@@ -35,4 +36,20 @@ public class ServerSetup : MonoBehaviour {
 			IntroScreen.SetActive(false);
         }
 	}
+
+	public string LocalIPAddress()
+    {
+         IPHostEntry host;
+         string localIP = "";
+         host = Dns.GetHostEntry(Dns.GetHostName());
+         foreach (IPAddress ip in host.AddressList)
+         {
+             if (ip.AddressFamily == AddressFamily.InterNetwork)
+             {
+                 localIP = ip.ToString();
+                 break;
+             }
+         }
+         return localIP;
+    }
 }

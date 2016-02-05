@@ -8,11 +8,18 @@ using System.Collections;
      private bool alreadyFixed;
      public float upp;
      public float rightt;
+
+     bool isFixed;
      
      public void OnSelect(BaseEventData eventData)
      {  	
-		StartCoroutine("FixCaret");
-      }
+     	if(!isFixed)
+     	{
+			StartCoroutine("FixCaret");
+			isFixed = true;
+     	}
+			
+     }
 
       IEnumerator FixCaret()
       {

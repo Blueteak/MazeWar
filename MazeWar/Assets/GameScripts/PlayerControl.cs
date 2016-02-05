@@ -189,8 +189,10 @@ public class PlayerControl : NetworkBehaviour {
 		}
 	}
 
+	/*
 	void OnDestroy()
 	{
 		transform.GetComponentInChildren<Camera>().transform.SetParent(null);
 	}
+	*/
 }
