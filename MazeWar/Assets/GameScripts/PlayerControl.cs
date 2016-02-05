@@ -12,6 +12,11 @@ public class PlayerControl : NetworkBehaviour {
 	[SyncVar]
 	int pY;
 
+	[SyncVar]
+	public int score;
+	[SyncVar]
+	public string name;
+
 	public LineRenderer r;
 
 	public GameObject SpriteObj;
@@ -27,6 +32,12 @@ public class PlayerControl : NetworkBehaviour {
 	public Vector2 pos()
 	{
 		return new Vector2(pX, pY);
+	}
+
+	[Command]
+	public void CmdSetName(string nm)
+	{
+		name = nm;
 	}
 	
 	// Update is called once per frame
@@ -59,12 +70,15 @@ public class PlayerControl : NetworkBehaviour {
 		{
 			if(!setup)
 			{
+				gameObject.tag = "OtherPlayer";
 				SpriteObj.SetActive(true);
 			}
 		}
 			
 		if(isLocalPlayer && Input.GetKeyDown(KeyCode.Space))
 		{
+			StopCoroutine("LineShow");
+			StartCoroutine("LineShow");
 			CmdShoot();
 		}
 	}
@@ -72,28 +86,39 @@ public class PlayerControl : NetworkBehaviour {
 	[Command]
 	void CmdShoot()
 	{
+		Debug.Log("Player Shooting");
 		StopCoroutine("LineShow");
 		StartCoroutine("LineShow");
-		Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*10);
-		Debug.DrawRay(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*10,Color.blue,1);
+		Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*30);
+		Debug.DrawRay(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*30,Color.blue,1);
 		RaycastHit hit;
 		if(Physics.Raycast(r, out hit, 15))
 		{
-			if(hit.collider.tag == "OtherPlayer")
+			if(hit.collider.tag == "OtherPlayer" || hit.collider.tag == "MyPlayer")
 			{
-				Destroy(hit.collider.gameObject);
+				PlayerControl opc = hit.collider.GetComponentInParent<PlayerControl>();
+				changeScore(10);
+				opc.kill();
 			}
 		}
 	}
 
+	public void changeScore(int x)
+	{
+		score += x;
+	}
+
+	public void kill()
+	{
+		RandomPlacement();
+	}
+
 	IEnumerator LineShow()
 	{
-		Debug.Log("Showing Line");
 		r.enabled = true;
 		yield return new WaitForSeconds(0.1f);
 		r.enabled = false;
 		Debug.Log("Hiding Line");
-		StopCoroutine("LineShow");
 	}
 
 	public void RandomPlacement()

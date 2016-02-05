@@ -27,6 +27,8 @@ public class ClientSetup2 : MonoBehaviour {
 		if(Input.GetButtonDown("Submit"))
 		{
 			Debug.Log("Name Selected: " + name);
+			FindObjectOfType<PlayerDetails>().name = name;
+			FindObjectOfType<PlayerDetails>().hasName = true;
 			FindObjectOfType<NetworkLogic>().SetupClient(IP);
 			FindObjectOfType<NetworkLogic>().playerName = name;
 			gameObject.SetActive(false);

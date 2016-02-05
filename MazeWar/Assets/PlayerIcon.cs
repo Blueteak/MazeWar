@@ -18,12 +18,13 @@ public class PlayerIcon : MonoBehaviour {
 	{
 		Rect r = transform.parent.GetComponent<RectTransform>().rect;
 		Dimensions = new Vector2(r.width, r.height);
-		mGen = FindObjectOfType<MazeGenerator>();
 	}
 
 	void Update () 
 	{
-		if(m == null)
+		if(mGen == null)
+			mGen = FindObjectOfType<MazeGenerator>();
+		else if(m == null)
 		{
 			m = mGen.currentMaze();
 		}

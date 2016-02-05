@@ -54,12 +54,14 @@
      <Compile Include="Assets\GameScripts\PlayerControl.cs" />
      <Compile Include="Assets\PlayerIcon.cs" />
      <Compile Include="Assets\Prefabs\LookAtCamera.cs" />
+     <Compile Include="Assets\Prefabs\PlayerDetails.cs" />
      <Compile Include="Assets\UIScripts\CaretStick.cs" />
      <Compile Include="Assets\UIScripts\ClientSetup1.cs" />
      <Compile Include="Assets\UIScripts\ClientSetup2.cs" />
      <Compile Include="Assets\UIScripts\InputSetup.cs" />
      <Compile Include="Assets\UIScripts\IntroScreen.cs" />
      <Compile Include="Assets\UIScripts\IntroScreen2.cs" />
+     <Compile Include="Assets\UIScripts\ScoreSystem.cs" />
      <Compile Include="Assets\UIScripts\ServerSetup.cs" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

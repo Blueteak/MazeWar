@@ -7,11 +7,14 @@ public class NetworkLogic : NetworkManager
 	public string playerName;
 	NetworkClient myClient;
 
+
 	public GameObject playerPrefab;
+
+	public MazeGenerator mg;
 
 	public void SetupServer () 
 	{
-		FindObjectOfType<MazeGenerator>().MazeSeed = 0; //Needs to change for all clients
+		mg.MazeSeed = Random.Range(0,10000); //Needs to change for all clients
         StartHost();
 	}
 
@@ -24,7 +27,6 @@ public class NetworkLogic : NetworkManager
 	public override void OnClientConnect (NetworkConnection conn)
 	{
 		base.OnClientConnect (conn);
-		FindObjectOfType<MazeGenerator>().NewMaze();
 	}
 
 }

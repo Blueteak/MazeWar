@@ -19,6 +19,11 @@ public class MazeGenerator : NetworkBehaviour {
 	[SyncVar]
 	public int MazeSeed;
 
+	void Start()
+	{
+		NewMaze();
+	}
+
 	public void NewMaze()
 	{
 		ClearOld();

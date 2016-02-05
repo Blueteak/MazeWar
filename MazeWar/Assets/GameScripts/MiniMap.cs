@@ -10,14 +10,15 @@ public class MiniMap : MonoBehaviour {
 	// Use this for initialization
 	void Start () 
 	{
-		mGen = FindObjectOfType<MazeGenerator>();
 		im = GetComponent<Image>();
 	}
-	
+
 	// Update is called once per frame
 	void Update () 
 	{
-		if(m == null)
+		if(mGen == null)
+			mGen = FindObjectOfType<MazeGenerator>();
+		else if(m == null && mGen != null)
 		{
 			m = mGen.currentMaze();
 			if(m != null)

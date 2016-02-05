@@ -27,6 +27,8 @@ public class ServerSetup : MonoBehaviour {
 		if(Input.GetButtonDown("Submit"))
 		{
 			Debug.Log("Name Selected: " + name);
+			FindObjectOfType<PlayerDetails>().name = name;
+			FindObjectOfType<PlayerDetails>().hasName = true;
 			FindObjectOfType<NetworkLogic>().playerName = name;
 			FindObjectOfType<NetworkLogic>().SetupServer();
 			gameObject.SetActive(false);
