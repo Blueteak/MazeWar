@@ -23,4 +23,4 @@ Game Window
 
 ##Play
 
-Play WebGL Link: 
+Download Link: http://blueteak.itch.io/maze-war?secret=sx3QrXUa77nbPs1Dj2vayMC45M
