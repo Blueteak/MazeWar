@@ -65,6 +65,8 @@ public class PlayerControl : NetworkBehaviour {
 				Debug.Log("Move Command");
 				CmdDoMovement(up, down, left, right);
 			}
+			CheckSeen();
+
 		}
 		else
 		{
@@ -83,16 +85,35 @@ public class PlayerControl : NetworkBehaviour {
 		}
 	}
 
+	void CheckSeen()
+	{
+		Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*50);
+		Debug.DrawRay(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*50,Color.blue,1);
+		RaycastHit hit;
+		if(Physics.Raycast(r, out hit, 50))
+		{
+			if(hit.collider.tag == "OtherPlayer" || hit.collider.tag == "MyPlayer")
+			{
+				PlayerControl opc = hit.collider.GetComponentInParent<PlayerControl>();
+				FindObjectOfType<ScoreSystem>().CurrentView = opc.name;
+			}
+			else
+				FindObjectOfType<ScoreSystem>().CurrentView = "";
+		}
+		else
+			FindObjectOfType<ScoreSystem>().CurrentView = "";
+	}
+
 	[Command]
 	void CmdShoot()
 	{
 		Debug.Log("Player Shooting");
 		StopCoroutine("LineShow");
 		StartCoroutine("LineShow");
-		Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*30);
-		Debug.DrawRay(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*30,Color.blue,1);
+		Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*50);
+		Debug.DrawRay(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*50,Color.blue,1);
 		RaycastHit hit;
-		if(Physics.Raycast(r, out hit, 15))
+		if(Physics.Raycast(r, out hit, 50))
 		{
 			if(hit.collider.tag == "OtherPlayer" || hit.collider.tag == "MyPlayer")
 			{

@@ -4,12 +4,16 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 public class ScoreSystem : MonoBehaviour {
 
-	public Text Names;
-	public Text Scores;
+	public GameObject nPrefab;
+	public Transform holder;
 
 	List<PScore> scores;
 
-	void Start() { scores = new List<PScore>(); }
+	List<GameObject> objs;
+
+	public string CurrentView;
+
+	void Start() { scores = new List<PScore>(); objs = new List<GameObject>();}
 
 	void Update()
 	{
@@ -28,12 +32,17 @@ public class ScoreSystem : MonoBehaviour {
 				scores.Add(n);
 			}
 			scores.Sort((x, y) => y.score.CompareTo(x.score));
-			Names.text = "";
-			Scores.text = "";
+			foreach(var v in objs)
+				Destroy(v);
+			objs = new List<GameObject>();
 			foreach(var v in scores)
 			{
-				Names.text += v.name + "\n";
-				Scores.text += v.score + "\n";
+				GameObject g = (GameObject)Instantiate(nPrefab);
+				g.transform.SetParent(holder);
+				g.transform.localScale = Vector3.one;
+				bool V = CurrentView.Equals(v.name);
+				g.GetComponent<NameObj>().Init(v.name, v.score, V);
+				objs.Add(g);
 			}
 		}
 	}
