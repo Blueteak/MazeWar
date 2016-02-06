@@ -30,8 +30,6 @@ using System.Collections;
          
          	Vector2 cpos = caretRT.anchoredPosition;
          
-         	Debug.Log("here's the ap .. " +cpos);
-         
 			cpos.y = cpos.y + upp;
 			cpos.x = cpos.x + rightt;
          

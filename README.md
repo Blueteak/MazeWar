@@ -20,3 +20,7 @@ Game Window
 • Original Game Resolution (606x808)
 • Xerox Alto Font Replicas
 • Original Raster-Line World Display
+
+##Play
+
+Play WebGL Link: 

@@ -98,10 +98,26 @@ public class PlayerControl : NetworkBehaviour {
 			{
 				PlayerControl opc = hit.collider.GetComponentInParent<PlayerControl>();
 				changeScore(10);
+				opc.RpcKill();
 				opc.kill();
 			}
 		}
 	}
+
+	[ClientRpc]
+    public void RpcKill()
+    {
+		if(GetComponentInChildren<InvertColorsEffect>() != null)
+		{
+			GetComponentInChildren<InvertColorsEffect>().enabled = true;
+        	Invoke("HideEffect", 0.15f);
+		}
+    }
+
+    void HideEffect()
+    {
+		GetComponentInChildren<InvertColorsEffect>().enabled = false;
+    }
 
 	public void changeScore(int x)
 	{
