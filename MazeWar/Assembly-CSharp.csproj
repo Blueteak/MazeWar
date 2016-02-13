@@ -55,6 +55,7 @@
      <Compile Include="Assets\GameScripts\PlayerCamera.cs" />
      <Compile Include="Assets\GameScripts\PlayerControl.cs" />
      <Compile Include="Assets\GameScripts\PlayerDetails.cs" />
+     <Compile Include="Assets\Prefabs\SinglePlayerControl.cs" />
      <Compile Include="Assets\UIScripts\CaretStick.cs" />
      <Compile Include="Assets\UIScripts\ClientSetup1.cs" />
      <Compile Include="Assets\UIScripts\ClientSetup2.cs" />
@@ -65,6 +66,8 @@
      <Compile Include="Assets\UIScripts\PlayerIcon.cs" />
      <Compile Include="Assets\UIScripts\ScoreSystem.cs" />
      <Compile Include="Assets\UIScripts\ServerSetup.cs" />
+     <Compile Include="Assets\UIScripts\SinglePlayerIcon.cs" />
+     <Compile Include="Assets\UIScripts\SinglePlayerStart.cs" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\Resources\NoiseEffectShaderRGB.shader" />
      <None Include="Assets\Standard Assets\Effects\ImageEffects\Shaders\_DepthOfField\SeparableWeightedBlurDof34.shader" />
