@@ -19,6 +19,8 @@ public class SinglePlayerControl : MonoBehaviour {
 
 	bool setup;
 
+	public bool PlayerControl;
+
 	void Start () 
 	{
 		gen = FindObjectOfType<MazeGenerator>();
@@ -53,9 +55,10 @@ public class SinglePlayerControl : MonoBehaviour {
 		bool down = Input.GetKeyDown(KeyCode.DownArrow);
 		bool left = Input.GetKeyDown(KeyCode.LeftArrow);
 		bool right = Input.GetKeyDown(KeyCode.RightArrow);
+		if(!PlayerControl)
+			return;
 		if(up || down || left || right)
 		{
-			Debug.Log("Move Command");
 			CmdDoMovement(up, down, left, right);
 		}
 		CheckSeen();
@@ -88,9 +91,8 @@ public class SinglePlayerControl : MonoBehaviour {
 			FindObjectOfType<ScoreSystem>().CurrentView = "";
 	}
 
-	void CmdShoot()
+	public void CmdShoot()
 	{
-		Debug.Log("Player Shooting");
 		StopCoroutine("LineShow");
 		StartCoroutine("LineShow");
 		Ray r = new Ray(transform.position+(Vector3.up*1.38f), transform.TransformDirection(Vector3.forward)*50);
@@ -137,7 +139,6 @@ public class SinglePlayerControl : MonoBehaviour {
 		r.enabled = true;
 		yield return new WaitForSeconds(0.1f);
 		r.enabled = false;
-		Debug.Log("Hiding Line");
 	}
 
 	public void RandomPlacement()
@@ -164,7 +165,7 @@ public class SinglePlayerControl : MonoBehaviour {
 		transform.localEulerAngles = new Vector3(0,Random.Range(0,4)*90, 0);
 	}
 
-	void CmdDoMovement(bool up, bool back, bool left, bool right)
+	public void CmdDoMovement(bool up, bool back, bool left, bool right)
 	{
 		Vector2 fDir = new Vector2(0,1);
 		float ang = transform.localEulerAngles.y;
