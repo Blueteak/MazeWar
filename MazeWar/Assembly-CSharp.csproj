@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GameScripts\AIPlayer.cs" />
      <Compile Include="Assets\GameScripts\ClosestSprite.cs" />
      <Compile Include="Assets\GameScripts\ExtensionMethods.cs" />
      <Compile Include="Assets\GameScripts\LookAtCamera.cs" />
