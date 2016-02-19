@@ -45,7 +45,7 @@ public class SinglePlayerControl : MonoBehaviour {
 			RandomPlacement();
 		}
 
-		if(!setup)
+		if(!setup && PlayerControl)
 		{
 			gameObject.tag = "MyPlayer";
 			SpriteObj.SetActive(false);
@@ -79,12 +79,12 @@ public class SinglePlayerControl : MonoBehaviour {
 		RaycastHit hit;
 		if(Physics.Raycast(r, out hit, 50))
 		{
-			if(hit.collider.tag == "OtherPlayer" || hit.collider.tag == "MyPlayer")
+			if(PlayerControl && (hit.collider.tag == "OtherPlayer" || hit.collider.tag == "MyPlayer"))
 			{
-				PlayerControl opc = hit.collider.GetComponentInParent<PlayerControl>();
+				SinglePlayerControl opc = hit.collider.GetComponentInParent<SinglePlayerControl>();
 				FindObjectOfType<ScoreSystem>().CurrentView = opc.name;
 			}
-			else
+			else if(PlayerControl)
 				FindObjectOfType<ScoreSystem>().CurrentView = "";
 		}
 		else
@@ -102,7 +102,7 @@ public class SinglePlayerControl : MonoBehaviour {
 		{
 			if(hit.collider.tag == "OtherPlayer" || hit.collider.tag == "MyPlayer")
 			{
-				PlayerControl opc = hit.collider.GetComponentInParent<PlayerControl>();
+				SinglePlayerControl opc = hit.collider.GetComponentInParent<SinglePlayerControl>();
 				changeScore(10);
 				opc.RpcKill();
 				opc.kill();
@@ -129,9 +129,13 @@ public class SinglePlayerControl : MonoBehaviour {
 		score += x;
 	}
 
+	public bool justDied;
+
 	public void kill()
 	{
 		RandomPlacement();
+		if(!PlayerControl)
+			justDied = true;
 	}
 
 	IEnumerator LineShow()
@@ -180,7 +184,7 @@ public class SinglePlayerControl : MonoBehaviour {
 		{
 			int nX = pX + (int)fDir.x;
 			int nY = pY + (int)fDir.y;
-			if(!m.GetCell(nX, nY).isWall)
+			if(!m.GetCell(nX, nY).isWall && notTaken(nX, nY))
 			{
 				pX = nX;
 				pY = nY;
@@ -191,7 +195,7 @@ public class SinglePlayerControl : MonoBehaviour {
 		{
 			int nX = pX - (int)fDir.x;
 			int nY = pY - (int)fDir.y;
-			if(!m.GetCell(nX, nY).isWall)
+			if(!m.GetCell(nX, nY).isWall && notTaken(nX, nY))
 			{
 				pX = nX;
 				pY = nY;
@@ -206,6 +210,20 @@ public class SinglePlayerControl : MonoBehaviour {
 		{
 			transform.localEulerAngles += new Vector3(0, 90, 0);
 		}
+	}
+
+	bool notTaken(int x, int y)
+	{
+		SinglePlayerControl[] controls = GameObject.FindObjectsOfType<SinglePlayerControl>();
+		foreach(var c in controls)
+		{
+			Vector2 v = c.pos();
+			int cx = (int)v.x;
+			int cy = (int)v.y;
+			if(x == cx && y == cy)
+				return false;
+		}
+		return true;
 	}
 
 }

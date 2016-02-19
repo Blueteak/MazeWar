@@ -15,6 +15,7 @@ public class SinglePlayerStart : MonoBehaviour {
 			MazeGen.GetComponent<MazeGenerator>().MazeSeed = Random.Range(0, 1000);
 			MazeGen.SetActive(true);
 			SPlayer.SetActive(true);
+			SPlayer.GetComponent<SinglePlayerControl>().name = name;
 			AIPlayer[] plrs = GameObject.FindObjectsOfType<AIPlayer>();
 			foreach(var p in plrs)
 			{

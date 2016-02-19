@@ -1,12 +1,9 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/UIScripts/SinglePlayerIcon.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/GameScripts/AIPlayer.cs">
     <Files>
-      <File FileName="Assets/UIScripts/SinglePlayerStart.cs" Line="17" Column="28" />
-      <File FileName="Assets/GameScripts/PlayerControl.cs" Line="228" Column="1" />
-      <File FileName="Assets/Prefabs/SinglePlayerControl.cs" Line="49" Column="1" />
-      <File FileName="Assets/UIScripts/PlayerIcon.cs" Line="6" Column="32" />
-      <File FileName="Assets/UIScripts/SinglePlayerIcon.cs" Line="35" Column="50" />
+      <File FileName="Assets/GameScripts/AIPlayer.cs" Line="26" Column="34" />
+      <File FileName="Assets/Prefabs/SinglePlayerControl.cs" Line="168" Column="9" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
