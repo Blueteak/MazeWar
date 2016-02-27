@@ -1,20 +1,25 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
+using System.IO;
+
 public class AIPlayer : MonoBehaviour {
 
 	bool online;
 	Maze m;
 	SinglePlayerControl control;
 
-	public IntVector wantPos;
-	public Stack<Direction> MoveQ;
 	bool hasPath;
 
 	public float MoveSpeed;
 	float mCD;
 	public float ReflexSpeed;
 	float rCD;
+
+	public TextAsset t;
+	string s;
+
 
 	public void Init()
 	{
@@ -35,9 +40,9 @@ public class AIPlayer : MonoBehaviour {
 
 	IntVector randomPos()
 	{
-		IntVector nVec = new IntVector(Random.Range(0,(int)m.Dimensions().x), Random.Range(0, (int)m.Dimensions().y));
+		IntVector nVec = new IntVector(UnityEngine.Random.Range(0,(int)m.Dimensions().x), UnityEngine.Random.Range(0, (int)m.Dimensions().y));
 		while(m.GetCell(nVec.x, nVec.y).isWall)
-			nVec = new IntVector(Random.Range(0,(int)m.Dimensions().x), Random.Range(0, (int)m.Dimensions().y));
+			nVec = new IntVector(UnityEngine.Random.Range(0,(int)m.Dimensions().x), UnityEngine.Random.Range(0, (int)m.Dimensions().y));
 		return nVec;
 	}
 
@@ -60,16 +65,132 @@ public class AIPlayer : MonoBehaviour {
 	}
 
 	bool[,] visited;
+	int[,] weights;
+	public IntVector wantPos;
+	public Stack<Direction> MoveQ;
+
+	bool printed = false;
 
 	void GetPath()
 	{
-		Debug.Log("Getting Path");
+		s += "Getting Path to: " + wantPos.x + " , " + wantPos.y + "\n\n";
 		MoveQ = new Stack<Direction>();
-		visited = new bool[(int)m.Dimensions().x, (int)m.Dimensions().y];
-		bool path = recursiveSolve((int)control.pos().x, (int)control.pos().y);
-		hasPath = path;
+		visited = new bool[(int)m.Dimensions().y, (int)m.Dimensions().x];
+		weights = new int[(int)m.Dimensions().y, (int)m.Dimensions().x];
+		for(int y = weights.GetLength(0)-1; y >= 0; y--)
+		{
+			for(int x = 0; x < weights.GetLength(1); x++)
+			{
+				if(m.GetCell(x,y).isWall)
+				{
+					weights[y,x] = -1;
+					visited[y,x] = true;
+				}
+				else
+				{
+					weights[y,x] = int.MaxValue;
+					visited[y,x] = false;
+				}
+					
+			}
+		}
+		recursiveSolve((int)control.pos().x, (int)control.pos().y, 0);
+		if(!printed)
+		{
+			Debug.Log("AI Weight Path: " + gameObject.name);
+			printed = true;
+			for(int y = weights.GetLength(0)-1; y >= 0; y--)
+			{
+				string mapLine = "";
+				for(int x = 0; x < weights.GetLength(1); x++)
+				{
+					if(x == wantPos.x && y == wantPos.y)
+					{
+						mapLine += "X  ";
+					}
+					else if(weights[y,x] != -1)
+					{
+						if(weights[y,x] > 9)
+							mapLine += weights[y,x] + " ";
+						else
+							mapLine += weights[y,x] + "  ";
+					}
+					else
+						mapLine += "#  ";
+				}
+				s += mapLine+"\n";
+			}
+		}
+		GetPathAStar();
+		/*
+		File.WriteAllText(Application.dataPath + "/AItest.text", s);
+        AssetDatabase.Refresh();
+        */
+        s = "";
+		hasPath = true;
 	}
 
+	void recursiveSolve(int x, int y, int curStep)
+	{
+		weights[y,x] = curStep;
+		if(weights[y+1,x] != -1 && weights[y+1,x] > curStep)
+			recursiveSolve(x, y+1, curStep+1);
+		if(weights[y-1,x] != -1 && weights[y-1,x] > curStep)
+			recursiveSolve(x, y-1, curStep+1);
+		if(weights[y,x-1] != -1 && weights[y,x-1] > curStep)
+			recursiveSolve(x-1, y, curStep+1);
+		if(weights[y,x+1] != -1 && weights[y,x+1] > curStep)
+			recursiveSolve(x+1, y, curStep+1);
+
+	}
+
+	void GetPathAStar()
+	{
+		IntVector curPos = wantPos;
+		IntVector startP = new IntVector((int)control.pos().x, (int)control.pos().y);
+		s += "\nRead top to bottom\n\nPath To: " + curPos.x + "," +curPos.y+"\n"; 
+		int steps = 0;
+		while(weights[curPos.y, curPos.x] != 0 && steps < 150)
+		{
+			int curWeight = weights[curPos.y, curPos.x];
+			Direction d = Direction.wait;
+			int mw = int.MaxValue;
+			int mx = 0; int my = 0;
+			if(curPos.y < weights.GetLength(0)-1 && weights[curPos.y+1, curPos.x] != -1 && !visited[curPos.y+1, curPos.x] && weights[curPos.y+1, curPos.x] <= mw)
+			{
+				d = Direction.down;
+				mw = weights[curPos.y+1, curPos.x];
+				mx = curPos.y+1; my = curPos.x;
+			}
+			if(curPos.y > 0 && weights[curPos.y-1, curPos.x] <= mw && weights[curPos.y-1, curPos.x] != -1 && !visited[curPos.y-1, curPos.x])
+			{
+				mw = weights[curPos.y -1, curPos.x]; mx = curPos.y-1; my = curPos.x;
+				d = Direction.up;
+			}
+			if(curPos.x > 0 && weights[curPos.y, curPos.x-1] <= mw && weights[curPos.y, curPos.x-1] != -1 && !visited[curPos.y, curPos.x-1])
+			{
+				mw = weights[curPos.y, curPos.x-1]; mx = curPos.y; my = curPos.x-1;
+				d = Direction.right;
+			}
+			if(curPos.x < weights.GetLength(1)-1 && weights[curPos.y, curPos.x+1] <= mw && weights[curPos.y, curPos.x+1] != -1 && !visited[curPos.y, curPos.x+1])
+			{
+				mw = weights[curPos.y, curPos.x+1]; mx = curPos.y; my = curPos.x+1;
+				d = Direction.left;
+			}
+			if(d != Direction.wait)
+			{
+				s += "\n"+steps+ " : " + d + " to " + my + "," + mx + " -- Weight: " + weights[mx, my];
+				MoveQ.Push(d);
+				visited[curPos.y, curPos.x] = true;
+				curPos.y = mx; curPos.x = my;
+			}
+			steps++;
+		}
+		s+= "\n\nFrom: " + startP.x + "," +startP.y;
+	}
+
+
+	/*
 	bool recursiveSolve(int x, int y)
 	{
 		if (x == wantPos.x && y == wantPos.y) return true;
@@ -112,6 +233,7 @@ public class AIPlayer : MonoBehaviour {
 	    }
 		return false;
 	}
+	*/
 
 	Direction interm = Direction.wait;
 
@@ -232,8 +354,12 @@ public class AIPlayer : MonoBehaviour {
 			if(hit.collider.tag == "OtherPlayer" || hit.collider.tag == "MyPlayer")
 			{
 				hc = hit.collider.GetComponent<SinglePlayerControl>();
+				if(!following)
+				{
+					Debug.Log("Attempting to follow new target");
+					Invoke("SetPos", 0.5f);
+				}
 				following = true;
-				Invoke("SetPos", 0.5f);
 				rCD -= Time.deltaTime;
 				if(rCD <= 0)
 				{
@@ -253,7 +379,7 @@ public class AIPlayer : MonoBehaviour {
 		if(hc != null)
 		{
 			MoveQ.Push(Direction.wait);
-			Debug.Log("Attempting to follow new target");
+			Debug.Log("Locked onto new Target");
 			wantPos = new IntVector((int)hc.pos().x, (int)hc.pos().y);
 			GetPath();
 		}
