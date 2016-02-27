@@ -22,33 +22,36 @@ Getting Path to: 16 , 5
 #  1  0  1  2  3  4  5  #  9  #  13 14 15 16 17 18 19 20 21 #  
 #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  #  
 
-Read top to bottom
+Moving from Goal back to Start
 
-Path To: 16,5
+Path To: 2,1
 
-0 : right to 15,5 -- Weight: 19
-1 : down to 15,6 -- Weight: 18
-2 : right to 14,6 -- Weight: 17
-3 : right to 13,6 -- Weight: 16
-4 : up to 13,5 -- Weight: 15
-5 : up to 13,4 -- Weight: 14
-6 : right to 12,4 -- Weight: 13
-7 : right to 11,4 -- Weight: 12
-8 : up to 11,3 -- Weight: 11
-9 : right to 10,3 -- Weight: 10
-10 : right to 9,3 -- Weight: 9
-11 : up to 9,2 -- Weight: 8
-12 : right to 8,2 -- Weight: 7
-13 : right to 7,2 -- Weight: 6
-14 : up to 7,1 -- Weight: 5
-15 : right to 6,1 -- Weight: 4
-16 : right to 5,1 -- Weight: 3
-17 : right to 4,1 -- Weight: 2
-18 : right to 3,1 -- Weight: 1
-19 : right to 2,1 -- Weight: 0
+0 : left to 15,5 -- Weight: 19
+1 : up to 15,6 -- Weight: 18
+2 : left to 14,6 -- Weight: 17
+3 : left to 13,6 -- Weight: 16
+4 : down to 13,5 -- Weight: 15
+5 : down to 13,4 -- Weight: 14
+6 : left to 12,4 -- Weight: 13
+7 : left to 11,4 -- Weight: 12
+8 : down to 11,3 -- Weight: 11
+9 : left to 10,3 -- Weight: 10
+10 : left to 9,3 -- Weight: 9
+11 : down to 9,2 -- Weight: 8
+12 : left to 8,2 -- Weight: 7
+13 : left to 7,2 -- Weight: 6
+14 : down to 7,1 -- Weight: 5
+15 : left to 6,1 -- Weight: 4
+16 : left to 5,1 -- Weight: 3
+17 : left to 4,1 -- Weight: 2
+18 : left to 3,1 -- Weight: 1
+19 : left to 2,1 -- Weight: 0
 
-From: 2,1
+From: 16,5
 ```
+<br />
+After the path is found from the goal position to the start position, the directions are inverted and placed into a stack (last in first out) to move the opposite way.<br /><br />The direction stack is in global coordinates (where up is up related to the maze) so they need to be converted into local directions, since the AI can only move forward/backward and turn 90º left/right.
+
 ## Movement
 
 ### Sweeping
