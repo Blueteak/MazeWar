@@ -26,26 +26,26 @@ Moving from Goal back to Start
 
 Path To: 2,1
 
-0 : left to 15,5 -- Weight: 19
-1 : up to 15,6 -- Weight: 18
-2 : left to 14,6 -- Weight: 17
-3 : left to 13,6 -- Weight: 16
-4 : down to 13,5 -- Weight: 15
-5 : down to 13,4 -- Weight: 14
-6 : left to 12,4 -- Weight: 13
-7 : left to 11,4 -- Weight: 12
-8 : down to 11,3 -- Weight: 11
-9 : left to 10,3 -- Weight: 10
-10 : left to 9,3 -- Weight: 9
-11 : down to 9,2 -- Weight: 8
-12 : left to 8,2 -- Weight: 7
-13 : left to 7,2 -- Weight: 6
-14 : down to 7,1 -- Weight: 5
-15 : left to 6,1 -- Weight: 4
-16 : left to 5,1 -- Weight: 3
-17 : left to 4,1 -- Weight: 2
-18 : left to 3,1 -- Weight: 1
-19 : left to 2,1 -- Weight: 0
+0  : left to 15,5 -- Weight: 19
+1  : up to 15,6   -- Weight: 18
+2  : left to 14,6 -- Weight: 17
+3  : left to 13,6 -- Weight: 16
+4  : down to 13,5 -- Weight: 15
+5  : down to 13,4 -- Weight: 14
+6  : left to 12,4 -- Weight: 13
+7  : left to 11,4 -- Weight: 12
+8  : down to 11,3 -- Weight: 11
+9  : left to 10,3 -- Weight: 10
+10 : left to 9,3  -- Weight: 9
+11 : down to 9,2  -- Weight: 8
+12 : left to 8,2  -- Weight: 7
+13 : left to 7,2  -- Weight: 6
+14 : down to 7,1  -- Weight: 5
+15 : left to 6,1  -- Weight: 4
+16 : left to 5,1  -- Weight: 3
+17 : left to 4,1  -- Weight: 2
+18 : left to 3,1  -- Weight: 1
+19 : left to 2,1  -- Weight: 0
 
 From: 16,5
 ```
