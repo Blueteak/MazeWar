@@ -11,13 +11,13 @@ Game Window
 ##Features
 <br />
 - Multiplayer Version <br />
-⋅⋅- LAN Gameplay <br />
-⋅⋅- Host/Join Game <br />
+  - LAN Gameplay <br />
+  - Host/Join Game <br />
 - Singleplayer Version (AI) <br />
-⋅⋅- Pathfinding <br />
-⋅⋅- Independent Agent system<br />
-⋅⋅- Sight system <br />
-⋅⋅- Combat Reflex Speed <br />
+  - Pathfinding <br />
+  - Independent Agent system<br />
+  - Sight system <br />
+  - Combat Reflex Speed <br />
 - Score System <br />
 - Original Terminal Game Entry <br />
 - Procedural Maze Generation <br />
