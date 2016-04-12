@@ -9,18 +9,25 @@ Terminal Window when creating/joining a game<br /><br />
 Game Window
 
 ##Features
-• LAN Gameplay
-• Host/Join Game
-• Score System
-• Original Terminal Game Entry
-• Procedural Maze Generation
-• Game Minimap
-• Visible Opponent Avatars
-• FPS Kill System
-• Original Game Resolution (606x808)
-• Xerox Alto Font Replicas
-• Original Raster-Line World Display
+<br />
+• Multiplayer Version <br />
+-   LAN Gameplay <br />
+-   Host/Join Game <br />
+• Singleplayer Version (AI) <br />
+-   Pathfinding <br />
+-   Independent Agent system<br />
+-   Sight system <br />
+-   Combat Reflex Speed <br />
+• Score System <br />
+• Original Terminal Game Entry <br />
+• Procedural Maze Generation <br />
+• Game Minimap <br />
+• Visible Opponent Avatars <br />
+• FPS Kill System <br />
+• Original Game Resolution (606x808) <br />
+• Xerox Alto Font Replicas <br />
+• Original Raster-Line World Display <br />
 
 ##Play
-
-Download Link: http://blueteak.itch.io/maze-war?secret=sx3QrXUa77nbPs1Dj2vayMC45M
+<br /><br />
+Play Singleplayer Version online: http://tinyurl.com/mazewar
