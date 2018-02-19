@@ -1,6 +1,6 @@
 # Maze War
 This project is a pixel perfect recreation of Maze War for the Xerox Alto.<br />
-References for this project were sparse and all were low quality. Most of the reference material came from a VGA video of the game being played: https://www.youtube.com/watch?v=7chDIySXK2Q <br /><br />
+References for this project were sparse and all were low quality. Most of the reference material came from a VGA video of the game being played: https://www.youtube.com/watch?v=7chDIySXK2Q<br /><br />
 
 ### Final Product
 ![alt tag](http://i.imgur.com/mKTm7OC.png)<br />
