@@ -27,7 +27,3 @@ Game Window
 - Original Game Resolution (606x808) <br />
 - Xerox Alto Font Replicas <br />
 - Original Raster-Line World Display <br />
-
-## Play
-<br /><br />
-Play Singleplayer Version online: http://tinyurl.com/mazewar
